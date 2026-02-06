@@ -7,25 +7,25 @@ import { getToken } from "../utils/secureStorage";
 type Props = NativeStackScreenProps<RootStackParamList, "Splash">;
 
 export default function SplashScreen({ navigation }: Props) {
-//   useEffect(() => {
-//     const bootstrap = async () => {
-//       const token = await getToken();
+  useEffect(() => {
+    const bootstrap = async () => {
+      const token = await getToken();
 
-//       if (token) {
-//         navigation.reset({
-//           index: 0,
-//           routes: [{ name: "Home" }],
-//         });
-//       } else {
-//         navigation.reset({
-//           index: 0,
-//           routes: [{ name: "Phone" }],
-//         });
-//       }
-//     };
+      if (token) {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "Home" }],
+        });
+      } else {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "Phone" }],
+        });
+      }
+    };
 
-//     bootstrap();
-//   }, [navigation]);
+    bootstrap();
+  }, [navigation]);
 
   return (
     <View style={styles.container}>

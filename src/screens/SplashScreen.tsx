@@ -3,26 +3,50 @@ import { View, Text, StyleSheet } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../types/navigation";
 import { getToken } from "../utils/secureStorage";
+import { apiFetch } from "../services/api";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Splash">;
 
 export default function SplashScreen({ navigation }: Props) {
   useEffect(() => {
     const bootstrap = async () => {
-      const token = await getToken();
-
-      if (token) {
-        navigation.reset({
-          index: 0,
-          routes: [{ name: "Home" }],
-        });
-      } else {
-        navigation.reset({
-          index: 0,
-          routes: [{ name: "Phone" }],
-        });
-      }
-    };
+        const token = await getToken();
+      
+        // 1️⃣ Not logged in
+        if (!token) {
+          navigation.reset({
+            index: 0,
+            routes: [{ name: "Phone" }],
+          });
+          return;
+        }
+      
+        // 2️⃣ Logged in → check SOS
+        try {
+          const sos = await apiFetch("/sos/status");
+      
+          if (sos.status === "sos") {
+            navigation.reset({
+              index: 0,
+              routes: [{ name: "SosStatus" }],
+            });
+            return;
+          }
+      
+          // 3️⃣ Safe → Home
+          navigation.reset({
+            index: 0,
+            routes: [{ name: "Home" }],
+          });
+        } catch (error) {
+          // Fallback: if SOS check fails, still allow Home
+          navigation.reset({
+            index: 0,
+            routes: [{ name: "Home" }],
+          });
+        }
+      };
+      
 
     bootstrap();
   }, [navigation]);

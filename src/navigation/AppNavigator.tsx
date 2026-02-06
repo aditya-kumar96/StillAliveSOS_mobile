@@ -8,6 +8,7 @@ import { RootStackParamList } from "../types/navigation";
 import SplashScreen from "../screens/SplashScreen";
 
 import TabNavigator from "./TabNavigator";
+import SosStatusScreen from "../screens/SosStatusScreen";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -21,6 +22,7 @@ export default function AppNavigator() {
         <Stack.Screen name="Otp" component={OtpScreen} />
         
         
+<Stack.Screen name="SosStatus" component={SosStatusScreen} />
         <Stack.Screen name="Home" component={TabNavigator} />
       </Stack.Navigator>
     </NavigationContainer>

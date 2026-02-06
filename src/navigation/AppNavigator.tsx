@@ -7,6 +7,8 @@ import HomeScreen from "../screens/HomeScreen";
 import { RootStackParamList } from "../types/navigation";
 import SplashScreen from "../screens/SplashScreen";
 
+import TabNavigator from "./TabNavigator";
+
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function AppNavigator() {
@@ -17,7 +19,9 @@ export default function AppNavigator() {
         <Stack.Screen name="Splash" component={SplashScreen} />
         <Stack.Screen name="Phone" component={PhoneScreen} />
         <Stack.Screen name="Otp" component={OtpScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
+        
+        
+        <Stack.Screen name="Home" component={TabNavigator} />
       </Stack.Navigator>
     </NavigationContainer>
   );

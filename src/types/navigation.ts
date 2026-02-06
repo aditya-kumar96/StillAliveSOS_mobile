@@ -3,4 +3,5 @@ export type RootStackParamList = {
     Otp: { phone: string };
     Home: undefined;
     Splash: undefined;
+    EmergencyContact:undefined
   };

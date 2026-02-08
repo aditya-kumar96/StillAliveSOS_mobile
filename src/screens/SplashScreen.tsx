@@ -32,7 +32,6 @@ export default function SplashScreen({ navigation }: Props) {
             });
             return;
           }
-      
           // 3️⃣ Safe → Home
           navigation.reset({
             index: 0,
